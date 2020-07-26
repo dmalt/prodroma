@@ -34,9 +34,9 @@ def load_dframe(sujb_num):
             "Продолжительность сна": "sleep_duration",
             "Качество сна": "sleep_quality",
             "Свежесть после сна": "sleep_freshness",
-            "Больше света, чем обычно": "more_light",
+            "Больше света, чем обычно": "a_lot_light",
             "Чувствительность к свету": "light_sens_cat",
-            "Больше звука, чем обычно": "more_noise",
+            "Больше звука чем обычно": "a_lot_noise",
             "Чувствительность к звуку": "noise_sens_cat",
             "Были резкие запахи?": "strong_smells",
             "Чувствительность к запахам": "smell_sens_cat",
@@ -56,9 +56,17 @@ def load_dframe(sujb_num):
             "Работосособность": "productivity",
             "Сонливость": "sleepiness",
             "Зевания": "yawning",
-            "подташнивает": "nausea",
+            "Напряжение глаз": "eye_strain",
+            "боль в шее": "neck_pain",
+            "Чувствит кожи головы": "scalp_sens",
+            "Физическая ативность": "exercise",
+            "какой день": "which_day",
             "Перелеты": "flights",
             "1 день менструации": "pms_1st_day",
+            "подташнивает": "nausea",
+            "вегетатика": "vegetatics",
+            "мочеиспускание": "urination",
+            "% заполнения дневника": "journal_completion_percentage",
             "комментарий": "comment",
             "дата": "date",
             "ТП": "TP",
@@ -76,6 +84,17 @@ def load_dframe(sujb_num):
 
     dframe["ha_new"] = dframe["ha_new"].fillna(False)
     dframe["ha_cont"] = dframe["ha_cont"].fillna(False)
+    dframe["ha_now"] = dframe["ha_new"] | dframe["ha_cont"]
+
+    dframe["painkiller"] = dframe["painkiller"].fillna(False)
+    dframe["vomiting"] = dframe["vomiting"].fillna(False)
+    dframe["intens_by_mov"] = dframe["intens_by_mov"].fillna(False)
+    dframe["pulsation"] = dframe["pulsation"].fillna(False)
+    dframe["light_sens_bin"] = dframe["light_sens_bin"].fillna(False)
+    dframe["noise_sens_bin"] = dframe["noise_sens_bin"].fillna(False)
+    dframe["smell_sens_bin"] = dframe["smell_sens_bin"].fillna(False)
+    dframe["flights"] = dframe["flights"].fillna(False)
+    dframe["pms_1st_day"] = dframe["pms_1st_day"].fillna(False)
 
     cat_type = CategoricalDtype([1, 2, 3, 4, 5], ordered=True)
     for col in [
